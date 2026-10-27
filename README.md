@@ -29,23 +29,8 @@ FlowPilot turns saved task data into a clear workflow dashboard. The priority en
 
 ## Screenshots
 
-### Task creation
+Screenshots are intentionally not included in this repository.
 
-![FlowPilot task creation screen](screenshots/task-creation.png)
-
-Create structured tasks with a deadline, priority, estimated effort and importance score.
-
-### Task management
-
-![FlowPilot task management screen](screenshots/task-management.png)
-
-Search, filter, sort and open saved workflow items from one focused workspace.
-
-### Analytics
-
-![FlowPilot analytics screen](screenshots/analytics.png)
-
-See workload distribution, task status, priority trends, remaining effort and overdue tasks from real saved records.
 
 ## Priority formula
 
