@@ -29,7 +29,23 @@ FlowPilot turns saved task data into a clear workflow dashboard. The priority en
 
 ## Screenshots
 
-Screenshots are intentionally not included in this repository.
+### Workflow overview
+
+![FlowPilot dashboard overview](screenshots/dashboard-overview.png)
+
+The command-center dashboard presents live task metrics, the transparent next-task recommendation, priority radar and deadline health.
+
+### Task management
+
+![FlowPilot task management](screenshots/task-management.png)
+
+Users can search, filter, sort and inspect their saved tasks with a visible priority score.
+
+### Workflow analytics
+
+![FlowPilot analytics insights](screenshots/analytics-insights.png)
+
+The analytics view turns real saved-task data into status, priority, workload, remaining-effort and overdue-work insights.
 
 
 ## Priority formula
