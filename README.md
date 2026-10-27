@@ -41,6 +41,12 @@ Create structured tasks with a deadline, priority, estimated effort and importan
 
 Search, filter, sort and open saved workflow items from one focused workspace.
 
+### Analytics
+
+![FlowPilot analytics screen](screenshots/analytics.png)
+
+See workload distribution, task status, priority trends, remaining effort and overdue tasks from real saved records.
+
 ## Priority formula
 
 ```
