@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="FlowPilot - transparent workflow intelligence for better task decisions.">
+  <title>{% block title %}FlowPilot{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="{{ url_for('dashboard.dashboard') }}"><span class="brand-mark">F</span><span>Flow<span>Pilot</span></span></a>
+      <p class="eyebrow sidebar-label">WORKSPACE</p>
+      <nav aria-label="Main navigation">
+        <a href="{{ url_for('dashboard.dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard.dashboard' %}active{% endif %}"><span>◈</span> Overview</a>
+        <a href="{{ url_for('tasks.index') }}" class="nav-link {% if request.blueprint == 'tasks' %}active{% endif %}"><span>✓</span> My tasks</a>
+        <a href="{{ url_for('analytics.analytics') }}" class="nav-link {% if request.blueprint == 'analytics' %}active{% endif %}"><span>◔</span> Analytics</a>
+      </nav>
+      <div class="sidebar-bottom"><div class="local-note"><span class="status-dot"></span><div><strong>Local prototype</strong><small>Data stays on this device</small></div></div></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-button" id="menuButton" aria-label="Toggle navigation">☰</button>
+        <div><p class="eyebrow">AI WORKFLOW INTELLIGENCE</p><p class="topbar-subtitle">Plan smarter. Prioritize better. Achieve more.</p></div>
+        <a class="button button-primary top-create" href="{{ url_for('tasks.create') }}">+ New task</a>
+      </header>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}<div class="flash-stack" aria-live="polite">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

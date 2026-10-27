@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard · FlowPilot{% endblock %}
+{% block content %}
+<section class="hero-row"><div><p class="eyebrow">WORKFLOW COMMAND CENTER</p><h1>Make the next<br><em>right move.</em></h1><p class="lead">A transparent priority engine turns your real tasks and deadlines into an actionable plan.</p></div><a class="button button-primary hero-button" href="{{ url_for('tasks.create') }}">Create a focused task <span>→</span></a></section>
+<section class="metric-grid" aria-label="Task metrics">
+  <article class="metric-card"><span>Total tasks</span><strong>{{ metrics.total }}</strong><small>All workflow items</small></article>
+  <article class="metric-card accent-blue"><span>In progress</span><strong>{{ metrics.in_progress }}</strong><small>Active focus items</small></article>
+  <article class="metric-card accent-green"><span>Completed</span><strong>{{ metrics.completed }}</strong><small>{{ metrics.completion_rate }}% completion rate</small></article>
+  <article class="metric-card accent-coral"><span>Overdue</span><strong>{{ metrics.overdue }}</strong><small>Need attention now</small></article>
+  <article class="metric-card accent-purple"><span>Due this week</span><strong>{{ metrics.upcoming }}</strong><small>Upcoming deadlines</small></article>
+</section>
+{% if recommendation %}
+<section class="recommendation-card"><div class="recommendation-copy"><p class="eyebrow">WHAT SHOULD I DO NEXT?</p><h2>{{ recommendation.task.title }}</h2><p>{{ recommendation.explanation }}</p><div class="recommendation-meta"><span>Due {{ recommendation.task.deadline }}</span><span>{{ recommendation.task.estimated_minutes }} min</span><span class="pill {{ recommendation.task.priority }}">{{ recommendation.task.priority }}</span><span>Score {{ recommendation.score }}</span></div></div><a class="button button-light" href="{{ url_for('tasks.detail', task_id=recommendation.task.id) }}">Open task <span>→</span></a></section>
+{% else %}
+<section class="empty-state"><div class="empty-icon">✓</div><h2>Your queue is clear.</h2><p>Create a task when new work arrives. FlowPilot will recommend the next action once there is an active task.</p><a class="button button-primary" href="{{ url_for('tasks.create') }}">Create your first task</a></section>
+{% endif %}
+<section class="two-column"><div class="panel"><div class="panel-header"><div><p class="eyebrow">SMART QUEUE</p><h2>Priority radar</h2></div><a href="{{ url_for('tasks.index', sort='priority') }}">View all →</a></div>{% if ranked %}<div class="task-list">{% for item in ranked %}<a class="task-row" href="{{ url_for('tasks.detail', task_id=item.task.id) }}"><div class="score-orb">{{ item.score }}</div><div class="task-row-main"><strong>{{ item.task.title }}</strong><small>{{ item.task.category }} · Due {{ item.task.deadline }}</small></div><span class="pill {{ item.task.priority }}">{{ item.task.priority }}</span><span>→</span></a>{% endfor %}</div>{% else %}<p class="muted-empty">No active tasks to rank.</p>{% endif %}</div>
+<div class="panel"><div class="panel-header"><div><p class="eyebrow">DEADLINE HEALTH</p><h2>Needs attention</h2></div></div>{% if overdue %}<div class="attention-list">{% for task in overdue %}<a href="{{ url_for('tasks.detail', task_id=task.id) }}"><span class="warning-dot"></span><div><strong>{{ task.title }}</strong><small>Overdue since {{ task.deadline }}</small></div><span>Reschedule →</span></a>{% endfor %}</div>{% else %}<div class="positive-empty"><span>✓</span><div><strong>No overdue tasks</strong><small>Your current plan is on track.</small></div></div>{% endif %}</div></section>
+<section class="formula-note"><p class="eyebrow">HOW THE ENGINE WORKS</p><p>Priority score = priority base + importance × 6 + deadline urgency + short-effort bonus. It is a transparent rule-based recommendation, not an AI prediction.</p></section>
+{% endblock %}
